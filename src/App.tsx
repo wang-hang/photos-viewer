@@ -16,7 +16,7 @@ const App = (props: any) => {
   return (
     <div className='app'>
       <header className='header'>
-        This is Header
+        <h1>HH && OO</h1>
       </header>
       <main className='main'>
         <Viewer list={list} />
