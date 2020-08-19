@@ -1,13 +1,29 @@
 import * as React from 'react'
-import genji from './img/genji.png'
-import './css/style.css'
 import './css/style.styl'
+import './utils/rem'
+import { useEffect, useState } from  'react'
 
-const App = (props: any) => (
-    <div>
-      <h1>Hello World</h1>
-      <img src={genji} alt="" />
+import Viewer from './components/viewer'
+import { getImgList } from './api/index'
+
+const App = (props: any) => {
+  const [list, setList] = useState([])
+
+  useEffect(() => {
+    getImgList().then(res => setList(res))
+  })
+
+  return (
+    <div className='app'>
+      <header className='header'>
+        This is Header
+      </header>
+      <main className='main'>
+        <Viewer list={list} />
+      </main>
     </div>
-)
 
-export default App 
+  )
+}
+
+export default App

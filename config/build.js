@@ -18,7 +18,7 @@ if(!isProd){
   }))
   app.use(webpackHotMiddleware(compiler, {
     reload: true,
-    log: false,
+    log: console.log,
   }))
   app.listen(config.port, (err) => {
     if(err) console.error(err)
