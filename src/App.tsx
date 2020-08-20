@@ -1,22 +1,22 @@
 import * as React from 'react'
+import { useEffect, useState } from  'react'
 import './css/style.styl'
 import './utils/rem'
-import { useEffect, useState } from  'react'
 
-import Viewer from './components/viewer'
 import { getImgList } from './api/index'
+import Viewer from './components/viewer'
 
-const App = (props: any) => {
+const App = () => {
   const [list, setList] = useState([])
 
   useEffect(() => {
-    getImgList().then(res => setList(res))
+    getImgList().then((res) => setList(res))
   })
 
   return (
     <div className='app'>
       <header className='header'>
-        <h1>HH && OO</h1>
+        <h1>HH &amp;&amp; OO</h1>
       </header>
       <main className='main'>
         <Viewer list={list} />

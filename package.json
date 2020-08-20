@@ -10,12 +10,17 @@
   "author": "wanghang",
   "license": "ISC",
   "dependencies": {
+    "alloyfinger": "^0.1.16",
     "classnames": "^2.2.6",
+    "hammerjs": "^2.0.8",
+    "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
+    "@types/hammerjs": "^2.0.36",
+    "@types/lodash": "^4.14.159",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
     "@types/webpack-env": "^1.15.1",

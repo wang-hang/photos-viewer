@@ -1,7 +1,10 @@
-export default function debounce(fn: Function, interval = 300) {
+export default function debounce(fn?: any, interval = 300) {
   let timer = null
   return (...rest) => {
       clearTimeout(timer)
-      timer = setTimeout(() => fn(...rest), interval)
+      timer = setTimeout(() => {
+        fn.call(null, ...rest)
+        clearTimeout(timer)
+      }, interval)
   }
 }
