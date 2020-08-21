@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import Hammer from 'hammerjs'
 import * as React from 'react'
 
-import '../css/img-container'
+import '@styles/img-container'
 
-import { ImgData } from '../interfaces/index'
+import { ImgData } from '../../interfaces/index'
 
 const { useState, useEffect, useRef } = React
 

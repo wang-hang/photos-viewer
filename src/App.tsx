@@ -1,26 +1,23 @@
 import * as React from 'react'
 import { useEffect, useState } from  'react'
-import './css/style.styl'
-import './utils/rem'
+import { HashRouter, Route } from 'react-router-dom'
 
-import { getImgList } from './api/index'
-import Viewer from './components/viewer'
+import '@styles/app.styl'
+
+import Home from '@/pages/home/Home'
+import Upload from '@/pages/upload/Upload'
+import Data from '@/pages/data/Data'
+
+const Router = HashRouter
 
 const App = () => {
-  const [list, setList] = useState([])
-
-  useEffect(() => {
-    getImgList().then((res) => setList(res))
-  })
-
   return (
     <div className='app'>
-      <header className='header'>
-        <h1>HH &amp;&amp; OO</h1>
-      </header>
-      <main className='main'>
-        <Viewer list={list} />
-      </main>
+      <Router>
+        <Route path='/upload' component={Upload}></Route>
+        <Route path='/data' component={Data}></Route>
+        <Route path='/' exact component={Home}></Route>
+      </Router>
     </div>
 
   )

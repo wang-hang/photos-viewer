@@ -1,10 +1,9 @@
-import { debounce } from 'lodash'
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-import '../css/viewer.styl'
+import '@styles/viewer.styl'
 
-import { ImgData } from '../interfaces/index'
+import { ImgData } from '@interfaces/index'
 import ImgContainer from './img-container'
 
 interface Props {
