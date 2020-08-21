@@ -1,0 +1,62 @@
+@import './file-upload-item'
+
+.upload
+  padding-top: .1rem
+  .title
+    font-size: 20px
+    padding: .1rem
+    text-align: center
+    border-bottom: 1px solid #ccc
+  .form
+    margin: .3rem
+    .file
+      visibility: hidden
+      width: 0px
+      height: 0px
+      position: absolute
+      z-index: -999
+    .upload-landing
+      position relative
+      margin: 0 auto
+      width: 3.2rem
+      min-height: 1rem
+      max-height: 60vh
+      overflow: scroll
+      background: #ccc
+      // .file-list
+      .placeholder
+        font-size: 18px
+        position absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 100%
+        text-align: center
+
+    .btn:active,
+    .btn:focus
+      outline: none
+    .btn
+      display: block
+      margin: .2rem auto
+      width: 2.28rem
+      height:.5rem
+      font-size: 18px
+      user-select: none
+      border-radius:.1rem
+      color: #fff
+      transition: all .3s 
+    .clear-btn:active
+      border:1px dashed #096dd9
+      transition: all .1s 
+    .clear-btn
+      border:1px dashed #d9d9d9
+      background-color: #fff
+      color: #000
+    .submit-btn:active
+      border-color: #096dd9
+      background-color: #096dd9
+      transition: all .1s 
+    .submit-btn
+      background: #1890ff
+      border: 1px solid #1890ff

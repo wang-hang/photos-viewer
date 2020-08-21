@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useEffect, useState } from  'react'
-import { HashRouter, Route } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 
 import '@styles/app.styl'
 
@@ -14,9 +14,11 @@ const App = () => {
   return (
     <div className='app'>
       <Router>
-        <Route path='/upload' component={Upload}></Route>
-        <Route path='/data' component={Data}></Route>
-        <Route path='/' exact component={Home}></Route>
+        <Switch>
+          <Route path='/upload' component={Upload}></Route>
+          <Route path='/data' component={Data}></Route>
+          <Route path='/' component={Home}></Route>
+        </Switch>
       </Router>
     </div>
 

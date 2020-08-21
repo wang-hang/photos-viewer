@@ -3,15 +3,16 @@ import '@utils/rem'
 import * as React from 'react'
 import { useEffect, useState } from  'react'
 
-import { getImgList } from '@api/index'
+// import { getImgList } from '@api/index'
 import Viewer from './viewer'
 
 const App = () => {
   const [list, setList] = useState([])
 
   useEffect(() => {
-    getImgList().then((res) => setList(res))
-  })
+    // getImgList().then((res) => setList(res))
+    return () => {}
+  }, [])
 
   return (
     <div className='app'>
