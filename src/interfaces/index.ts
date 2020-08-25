@@ -9,7 +9,7 @@ export interface FileWithName {
 }
 
 export interface InterfacePhoto {
-  like?: number,
+  likeCount?: number,
   url?: string,
   id?: string
 }

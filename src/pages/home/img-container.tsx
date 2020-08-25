@@ -5,6 +5,7 @@ import * as React from 'react'
 import '@styles/img-container'
 
 import { InterfacePhoto } from '../../interfaces/index'
+import LikeIcon from '@components/like-icon'
 
 const { useState, useEffect, useRef } = React
 
@@ -14,12 +15,17 @@ interface Props {
 }
 
 const ImgContainer = (props: Props) => {
-  const { data: {url, id, like}, onLike } = props
+  const { data: {url, id, likeCount}, onLike } = props
   /** State */
   const [loading, setLoading] = useState(true)
+  const [isLike, setIsLike] = useState(false)
 
   /** handler */
   const handleLoaded = () => { setLoading(false) }
+  const handleToggleLike = (preLike) => {
+    console.log(preLike)
+    setIsLike(!isLike)
+  }
 
   const imgCls = classNames({hidden: loading})
   const el = useRef(null)
@@ -42,6 +48,11 @@ const ImgContainer = (props: Props) => {
       {
         loading && <div className='loading'></div>
       }
+      <div className='options-bar'>
+        <div className='heart'>
+          <LikeIcon like={isLike} onClick={handleToggleLike}></LikeIcon>
+        </div>
+      </div>
     </div>
   )
 }
