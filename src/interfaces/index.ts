@@ -3,7 +3,7 @@ export interface ImgData {
   src: string
 }
 
-export interface FileWithName{
+export interface FileWithName {
   raw: File,
   name: string
 }

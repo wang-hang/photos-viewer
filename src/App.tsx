@@ -4,9 +4,9 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 
 import '@styles/app.styl'
 
+import Data from '@/pages/data/Data'
 import Home from '@/pages/home/Home'
 import Upload from '@/pages/upload/Upload'
-import Data from '@/pages/data/Data'
 
 const Router = HashRouter
 

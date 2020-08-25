@@ -1,20 +1,18 @@
-import * as React from 'react'
+import { uploadFiles } from '@api/index'
+import { FileWithName } from '@interfaces/index'
 import * as _ from 'lodash'
-import classnames from 'classnames'
-import { uploadFiles, addPhoto } from '@api/index'
-import {  useEffect, useState, useRef } from 'react'
-import { FileWithName, InterfacePhoto } from '@interfaces/index'
+import * as React from 'react'
+import { useRef, useState } from 'react'
 
 import '@styles/upload'
 
 import FileUploadItem from './file-upload-item'
-type PercentMap = {
+interface PercentMap {
   [key: string]: {
     percent: number,
-    status: 'processing' | 'success' | 'fail'
+    status: 'processing' | 'success' | 'fail',
   }
 }
-
 
 const Upload = () => {
   const inputEl = useRef(null)
@@ -27,7 +25,7 @@ const Upload = () => {
     const list = fileList
     const files = [...e.target.files]
     e.target.value = null
-    const newList = files.map(f => {
+    const newList = files.map((f) => {
       return { raw: f, name: f.name }
     })
 
@@ -44,17 +42,17 @@ const Upload = () => {
   }
   const handleSubmit = () => {
     uploadFiles(fileList, handleProgress)
-    .catch(err => {
+    .catch((err) => {
       console.error(err)
     })
   }
   const handleProgress = (percentObj: {[key: string]: number}) => {
     const newPercentMap: PercentMap = {...percentMap}
-    for(const key in percentObj){
+    for (const key in percentObj) {
       const percent = percentObj[key]
       newPercentMap[key] = {
         percent,
-        status: percent < 100 ? 'processing' : 'success'
+        status: percent < 100 ? 'processing' : 'success',
       }
     }
     setPercentMap(newPercentMap)
@@ -67,7 +65,7 @@ const Upload = () => {
   const fileListDom = (
     <ul className='file-list'>
       {
-        fileList.map(f => {
+        fileList.map((f) => {
         const percent = _.get(percentMap, [f.name, 'percent'], 0)
         const status = _.get(percentMap, [f.name, 'status'], 'processing')
         return (
@@ -80,18 +78,18 @@ const Upload = () => {
   return (
     <div className='upload'>
       <h1 className='title'>Upload</h1>
-      <div className="form" onSubmit={handleSubmit}>
-        <input type="file" ref={inputEl} className="file" multiple onChange={handleFileChange} />
-        <div className="upload-landing" onClick={handleAddFile}>
+      <div className='form' onSubmit={handleSubmit}>
+        <input type='file' ref={inputEl} className='file' multiple onChange={handleFileChange} />
+        <div className='upload-landing' >
           {
             hasFiles
             ?
             fileListDom
             :
-            <div className="placeholder">点击添加文件</div>
+            <div className='placeholder' onClick={handleAddFile}>点击添加文件</div>
           }
         </div>
-        <button type="submit" className='btn submit-btn' onClick={handleSubmit}>确定</button>
+        <button type='submit' className='btn submit-btn' onClick={handleSubmit}>确定</button>
         <button className='btn clear-btn' onClick={handleClear}>清空</button>
       </div>
     </div>

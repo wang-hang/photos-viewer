@@ -1,8 +1,8 @@
+import c from 'classnames'
 import * as React from 'react'
 import { useState } from 'react'
-import c from 'classnames'
 
-interface Props{
+interface Props {
   name: string,
   progress: number,
   status?: 'processing' | 'success' | 'fail'
@@ -14,11 +14,11 @@ const FileUploadItem = (props: Props) => {
   // console.log(`${name}, ${progress}, ${status}`)
   const progressBarCls = c('upload-progress-bar', status)
   const progressStyle = {
-    width: `${progress}%`
+    width: `${progress}%`,
   }
   return (
-    <div className="file-upload-item">
-      <div className="file-name">
+    <div className='file-upload-item'>
+      <div className='file-name'>
         <span>{name}</span>
         <span>{progress}%</span>
       </div>
