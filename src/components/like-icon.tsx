@@ -6,17 +6,13 @@ import '@styles/like-icon'
 
 interface Props{
   like: boolean,
-  onClick: (like:boolean) => void
 }
 
 const LikeIcon = (props: Props) => {
-  const { like, onClick } = props
+  const { like, } = props
   const cls = c('iconfont', like ? 'icon-heart-fill like' : 'icon-heart')
-  const handleClick = () => {
-    onClick(like)
-  }
   return (
-    <div className="like-icon" onClick={handleClick}>
+    <div className="like-icon">
       <i className={cls} />
     </div>
   )

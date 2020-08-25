@@ -11,7 +11,7 @@ const { useState, useEffect, useRef } = React
 
 interface Props {
   data: InterfacePhoto,
-  onLike?: (id: string) => void
+  onLike?: (id: string, like: boolean) => void
 }
 
 const ImgContainer = (props: Props) => {
@@ -22,12 +22,21 @@ const ImgContainer = (props: Props) => {
 
   /** handler */
   const handleLoaded = () => { setLoading(false) }
-  const handleToggleLike = (preLike) => {
-    console.log(preLike)
-    setIsLike(!isLike)
+  const toggleLike = () => {
+    const preLike = isLike
+    console.log('toggle')
+    if(preLike === false){
+      console.log('like')
+    }else {
+      console.log('unlike')
+    }
+    onLike(id, !preLike)
+    setIsLike(!preLike)
   }
 
   const imgCls = classNames({hidden: loading})
+  const countCls = classNames('like-count', {"is-like": isLike})
+
   const el = useRef(null)
   useEffect(() => {
     const manager = new Hammer.Manager(el.current)
@@ -36,8 +45,9 @@ const ImgContainer = (props: Props) => {
       taps: 2,
     })
     manager.add(doubleTap)
-    manager.on('doubletap', (e) => {
-      onLike(id)
+    manager.on('doubletap', () => {
+      console.log(isLike)
+      toggleLike()
     })
     return () => manager.destroy()
   }, [])
@@ -48,10 +58,9 @@ const ImgContainer = (props: Props) => {
       {
         loading && <div className='loading'></div>
       }
-      <div className='options-bar'>
-        <div className='heart'>
-          <LikeIcon like={isLike} onClick={handleToggleLike}></LikeIcon>
-        </div>
+      <div className='options-bar' onClick={toggleLike}>
+        <LikeIcon like={isLike} ></LikeIcon>
+        <div className={countCls}>{likeCount}</div>
       </div>
     </div>
   )

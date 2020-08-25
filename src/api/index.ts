@@ -58,12 +58,18 @@ const getPotos = ():Promise<InterfacePhoto[]> => {
     const photos = res.map(item => {
       const id = item.id
       const url = item.get('url')
-      const like = item.get('like')
-      return { id, url, like }
+      const likeCount = item.get('like')
+      return { id, url, likeCount }
     })
     return photos
   })
+}
 
+const likePhoto = (id: string, isLike: boolean) => {
+  const photo = AV.Object.createWithoutData('Photo', id)
+  const amount = isLike ? 1 : -1
+  photo.increment('like', amount)
+  return photo.save()
 }
 
 export {
@@ -72,4 +78,5 @@ export {
   addPhoto,
   getPotos,
   logIn,
+  likePhoto,
 }

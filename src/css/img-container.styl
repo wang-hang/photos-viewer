@@ -35,6 +35,19 @@
     background: linear-gradient(-135deg,#f2f2f2 25%,#e6e6e6 37%,#f2f2f2 63%)
     background-size: 400% 100%
     animation: background-loading 1.4s ease infinite
+  .options-bar
+    display: flex
+    justify-content: center
+    align-items: center
+    .like-count.is-like
+      color: #f1577f
+      transition: color .3s
+    .like-count
+      transition: color .3s
+      height: 100%
+      font-size: 20px
+      color: #cdcdcd
+      margin-left: .05rem
 
 @keyframes background-loading {
   0% {background-position: -100% 50%}
