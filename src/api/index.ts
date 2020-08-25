@@ -6,6 +6,10 @@ const appKey = 'mNsq0lrczIDT1Ux7mFJAQU8f'
 const serverURL = 'http://api.wanghang.cool'
 AV.init({appId, appKey, serverURL})
 
+const logIn = (username: string, pwd: string) => {
+  return AV.User.logIn(username, pwd)
+}
+
 const uploadFile = (file: File, onprogress?) => {
     const fileInstance = new AV.File(file.name, file)
     return fileInstance.save({onprogress})
@@ -57,4 +61,5 @@ export {
   uploadFiles,
   addPhoto,
   getPotos,
+  logIn,
 }
