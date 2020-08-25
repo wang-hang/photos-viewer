@@ -4,10 +4,20 @@ import * as AV from 'leancloud-storage'
 const appId = 'uf7FCU7x33jbyEpVE2IpFUC2-gzGzoHsz'
 const appKey = 'mNsq0lrczIDT1Ux7mFJAQU8f'
 const serverURL = 'http://api.wanghang.cool'
+
+const ERRCODE_MAP = {
+  219: '账户已被锁定',
+  210: '账号密码不匹配',
+}
+
 AV.init({appId, appKey, serverURL})
 
-const logIn = (username: string, pwd: string) => {
-  return AV.User.logIn(username, pwd)
+const logIn = async (username: string, pwd: string) => {
+  try{
+    await AV.User.logIn(username, pwd)
+  }catch(err){
+    throw ERRCODE_MAP[err.code + '']
+  }
 }
 
 const uploadFile = (file: File, onprogress?) => {
