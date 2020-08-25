@@ -3,6 +3,7 @@ import { FileWithName } from '@interfaces/index'
 import * as _ from 'lodash'
 import * as React from 'react'
 import { useRef, useState } from 'react'
+import c from 'classnames'
 
 import '@styles/upload'
 
@@ -18,7 +19,11 @@ const Upload = () => {
   const inputEl = useRef(null)
   const [fileList, setFileList]  = useState<FileWithName[]>([])
   const [percentMap, setPercentMap]  = useState<PercentMap>({})
+  const [loading, setLoading]  = useState<boolean>(false)
   const hasFiles = fileList.length !== 0
+  const allUploaded = hasFiles && Object.values(percentMap).every(v => v.status === 'success')
+  const buttonDisabled = loading || allUploaded
+  const btnCls = c('btn submit-btn', {'disabled': buttonDisabled})
 
   /** Handler */
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +46,11 @@ const Upload = () => {
     inputEl.current.click()
   }
   const handleSubmit = () => {
+    setLoading(true)
     uploadFiles(fileList, handleProgress)
+    .then(() => {
+      setLoading(false)
+    })
     .catch((err) => {
       console.error(err)
     })
@@ -89,7 +98,7 @@ const Upload = () => {
             <div className='placeholder' onClick={handleAddFile}>点击添加文件</div>
           }
         </div>
-        <button type='submit' className='btn submit-btn' onClick={handleSubmit}>确定</button>
+        <button type='submit' className={btnCls} onClick={handleSubmit} disabled={loading || allUploaded}>上传</button>
         <button className='btn clear-btn' onClick={handleClear}>清空</button>
       </div>
     </div>
