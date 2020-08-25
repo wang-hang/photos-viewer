@@ -2,16 +2,18 @@ import '@styles/home.styl'
 import '@utils/rem'
 import * as React from 'react'
 import { useEffect, useState } from  'react'
+import { InterfacePhoto } from '@interfaces/index'
 
-// import { getImgList } from '@api/index'
+import * as API from '@api/index'
 import Viewer from './viewer'
 
 const App = () => {
-  const [list, setList] = useState([])
+  const [list, setList] = useState<InterfacePhoto[]>([])
 
   useEffect(() => {
-    // getImgList().then((res) => setList(res))
-    return () => {}
+    API.getPotos().then((photoList => {
+      setList(photoList)
+    }))
   }, [])
 
   return (

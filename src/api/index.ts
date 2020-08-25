@@ -38,10 +38,16 @@ const addPhoto = (photoUrl: string) => {
   })
 }
 
-const getPotos = () => {
+const getPotos = ():Promise<InterfacePhoto[]> => {
   const query = new AV.Query('Photo')
-  query.find().then((res) => {
-    console.log(res)
+  return query.find().then((res) => {
+    const photos = res.map(item => {
+      const id = item.id
+      const url = item.get('url')
+      const like = item.get('like')
+      return { id, url, like }
+    })
+    return photos
   })
 
 }

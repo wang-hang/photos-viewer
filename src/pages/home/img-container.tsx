@@ -1,20 +1,20 @@
 import classNames from 'classnames'
-import Hammer from 'hammerjs'
+import * as Hammer from 'hammerjs'
 import * as React from 'react'
 
 import '@styles/img-container'
 
-import { ImgData } from '../../interfaces/index'
+import { InterfacePhoto } from '../../interfaces/index'
 
 const { useState, useEffect, useRef } = React
 
 interface Props {
-  data: ImgData,
-  onLike?: (index) => void
+  data: InterfacePhoto,
+  onLike?: (id: string) => void
 }
 
 const ImgContainer = (props: Props) => {
-  const { data: {src, id}, onLike } = props
+  const { data: {url, id, like}, onLike } = props
   /** State */
   const [loading, setLoading] = useState(true)
 
@@ -38,7 +38,7 @@ const ImgContainer = (props: Props) => {
 
   return (
     <div className='img-container' ref={el} >
-      <img src={src} className={imgCls} onLoad={handleLoaded} />
+      <img src={url} className={imgCls} onLoad={handleLoaded} />
       {
         loading && <div className='loading'></div>
       }

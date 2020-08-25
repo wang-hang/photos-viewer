@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react'
 
 import '@styles/viewer.styl'
 
-import { ImgData } from '@interfaces/index'
+import { InterfacePhoto } from '@interfaces/index'
 import ImgContainer from './img-container'
 
 interface Props {
-  list: ImgData[]
+  list: InterfacePhoto[]
   onLoadMore?: () => {}
 }
 
