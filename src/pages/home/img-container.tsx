@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import * as Hammer from 'hammerjs'
 import * as React from 'react'
 
-import { InterfacePhoto } from '@interfaces/index'
 import LikeIcon from '@components/like-icon'
+import { InterfacePhoto } from '@interfaces/index'
 import * as LS from '@utils/local-storage-manager'
 
 import '@styles/img-container'
@@ -17,7 +17,7 @@ interface Props {
 
 const ImgContainer = (props: Props) => {
   const localLikeList: string[] = LS.get('likeList') || []
-  let { data: {url, id, likeCount}, onLike } = props
+  const { data: {url, id, likeCount}, onLike } = props
   /** State */
   const [loading, setLoading] = useState(true)
   const [isLike, setIsLike] = useState(localLikeList.includes(id))
@@ -29,13 +29,13 @@ const ImgContainer = (props: Props) => {
     const preLike = isLike
     onLike(id, !preLike)
     let newLikeCount = !preLike ? selfLikeCount + 1 : selfLikeCount - 1
-    if(newLikeCount < 0) newLikeCount = 0
+    if (newLikeCount < 0) { newLikeCount = 0 }
     setSelfLikeCount(newLikeCount)
     setIsLike(!preLike)
   }
 
   const imgCls = classNames({hidden: loading})
-  const countCls = classNames('like-count', {"is-like": isLike})
+  const countCls = classNames('like-count', {'is-like': isLike})
 
   const el = useRef(null)
   useEffect(() => {
