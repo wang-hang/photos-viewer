@@ -15,7 +15,7 @@ module.exports = {
   components: resolve('src/components'),
   interfaces: resolve('src/interfaces'),
   pages: resolve('src/pages'),
-  outputDir: resolve('dist'),
+  outputDir: resolve('docs'),
   publicPath: resolve('/'),
   outputFileName: '[name][hash:6].js',
 }
