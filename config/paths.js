@@ -18,4 +18,5 @@ module.exports = {
   outputDir: resolve('docs'),
   publicPath: resolve('/'),
   outputFileName: '[name][hash:6].js',
+  cname: resolve('CNAME'),
 }
