@@ -43,6 +43,7 @@ const Viewer = (props: Props) => {
       <div className='img-list' ref={el}>
         {ImgList}
       </div>
+      <div className='reach-bottom'>快别扒拉了！到底了~~</div>
     </div>
   )
 }
