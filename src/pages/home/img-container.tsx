@@ -2,10 +2,11 @@ import classNames from 'classnames'
 import * as Hammer from 'hammerjs'
 import * as React from 'react'
 
-import '@styles/img-container'
-
-import { InterfacePhoto } from '../../interfaces/index'
+import { InterfacePhoto } from '@interfaces/index'
 import LikeIcon from '@components/like-icon'
+import * as LS from '@utils/local-storage-manager'
+
+import '@styles/img-container'
 
 const { useState, useEffect, useRef } = React
 
@@ -15,21 +16,16 @@ interface Props {
 }
 
 const ImgContainer = (props: Props) => {
+  const localLikeList: string[] = LS.get('likeList') || []
   const { data: {url, id, likeCount}, onLike } = props
   /** State */
   const [loading, setLoading] = useState(true)
-  const [isLike, setIsLike] = useState(false)
+  const [isLike, setIsLike] = useState(localLikeList.includes(id))
 
   /** handler */
   const handleLoaded = () => { setLoading(false) }
   const toggleLike = () => {
     const preLike = isLike
-    console.log('toggle')
-    if(preLike === false){
-      console.log('like')
-    }else {
-      console.log('unlike')
-    }
     onLike(id, !preLike)
     setIsLike(!preLike)
   }
@@ -46,11 +42,10 @@ const ImgContainer = (props: Props) => {
     })
     manager.add(doubleTap)
     manager.on('doubletap', () => {
-      console.log(isLike)
       toggleLike()
     })
     return () => manager.destroy()
-  }, [])
+  }, [isLike])
 
   return (
     <div className='img-container' ref={el} >

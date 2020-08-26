@@ -1,6 +1,5 @@
 import c from 'classnames'
 import * as React from 'react'
-import { useState } from 'react'
 
 interface Props {
   name: string,
@@ -11,7 +10,6 @@ interface Props {
 const FileUploadItem = (props: Props) => {
   const { name, progress, status } = props
 
-  // console.log(`${name}, ${progress}, ${status}`)
   const progressBarCls = c('upload-progress-bar', status)
   const progressStyle = {
     width: `${progress}%`,
