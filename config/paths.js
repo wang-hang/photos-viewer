@@ -16,6 +16,6 @@ module.exports = {
   interfaces: resolve('src/interfaces'),
   pages: resolve('src/pages'),
   outputDir: resolve('docs'),
-  publicPath: resolve('/'),
+  publicPath: resolve('/photos-viewer'),
   outputFileName: '[name][hash:6].js',
 }
