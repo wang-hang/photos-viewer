@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useEffect, useState } from  'react'
+import { useEffect, useState, useRef } from  'react'
 import * as _ from 'lodash'
 
 import { InterfacePhoto } from '@interfaces/index'
@@ -10,17 +10,20 @@ import '@utils/rem'
 
 import Viewer from './viewer'
 
-const App = () => {
+
+const Home = () => {
   const [list, setList] = useState<InterfacePhoto[]>([])
+  const fullListRef = useRef<InterfacePhoto[]>()
+
+  const pageSize = 3 // 一次加载5张
   let pageIndex = 0
-  const pageSize = 5 // 一次加载5张
-  let fullList = []
 
   useEffect(() => {
     getPhotoList()
+    return () => {}
   }, [])
 
-  const handleLike = (id, isLike) => {
+  const handleLike = (id: string, isLike: boolean) => {
     let localLikeList: string[] = LS.get('likeList') || []
     API.likePhoto(id, isLike).then(res => {
       if(isLike){ // 在列表里添加
@@ -31,26 +34,27 @@ const App = () => {
       }
       // 保存到localStorage中
       LS.set('likeList', localLikeList)
+      console.log(list)
       getPhotoList()
     })
   }
   const getPhotoList = () => {
-    API.getPotos().then((photoList => {
-      fullList = photoList
-      updateList()
+    return API.getPotos().then((photoList => {
+      fullListRef.current = photoList
+      updateList(fullListRef.current, pageIndex)
     }))
   }
-  const updateList = () => {
-    const end = pageIndex * pageSize + pageSize
-    const newPhotos = fullList.slice(0, end)
-    if(end > fullList.length) return 
+  const updateList = (fullPhotosList: InterfacePhoto[], index:number) => {
+    const end = index * pageSize + pageSize
+    const newPhotos = fullPhotosList.slice(0, end)
+    if(end > fullPhotosList.length) return 
+    console.log(fullPhotosList)
     setList(newPhotos)
   }
   const handleLoadMore = () => {
     pageIndex++
-    updateList()
+    updateList(fullListRef.current, pageIndex)
   }
-
   return (
     <div className='app'>
       <header className='header'>
@@ -64,4 +68,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Home

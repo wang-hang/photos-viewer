@@ -13,3 +13,8 @@ export interface InterfacePhoto {
   url?: string,
   id?: string
 }
+
+export interface InterfacePage {
+  pageIndex: number,
+  pageSize: number
+}
