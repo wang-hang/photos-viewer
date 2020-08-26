@@ -69,7 +69,10 @@ const likePhoto = (id: string, isLike: boolean) => {
   const photo = AV.Object.createWithoutData('Photo', id)
   const amount = isLike ? 1 : -1
   photo.increment('like', amount)
-  return photo.save()
+  const query = new AV.Query('Photo').greaterThanOrEqualTo('like', 0)
+  return photo.save(null, {
+    query: amount < 0 ? query : '',
+  })
 }
 
 export {
