@@ -12,6 +12,9 @@ import Viewer from './viewer'
 
 const App = () => {
   const [list, setList] = useState<InterfacePhoto[]>([])
+  let pageIndex = 0
+  const pageSize = 5 // 一次加载5张
+  let fullList = []
 
   useEffect(() => {
     getPhotoList()
@@ -33,8 +36,19 @@ const App = () => {
   }
   const getPhotoList = () => {
     API.getPotos().then((photoList => {
-      setList(photoList)
+      fullList = photoList
+      updateList()
     }))
+  }
+  const updateList = () => {
+    const end = pageIndex * pageSize + pageSize
+    const newPhotos = fullList.slice(0, end)
+    if(end > fullList.length) return 
+    setList(newPhotos)
+  }
+  const handleLoadMore = () => {
+    pageIndex++
+    updateList()
   }
 
   return (
@@ -43,7 +57,7 @@ const App = () => {
         <h1>HH &amp;&amp; OO</h1>
       </header>
       <main className='main'>
-        <Viewer list={list}  onLike={handleLike}/>
+        <Viewer list={list}  onLike={handleLike} onLoadMore={handleLoadMore} />
       </main>
     </div>
 
