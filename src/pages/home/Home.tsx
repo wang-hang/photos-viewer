@@ -34,8 +34,12 @@ const Home = () => {
       }
       // 保存到localStorage中
       LS.set('likeList', localLikeList)
-      console.log(list)
-      getPhotoList()
+      // getPhotoList()
+      fullListRef.current.forEach(it => {
+        if(it.id === id){
+          it.likeCount += isLike ? 1:-1
+        }
+      })
     })
   }
   const getPhotoList = () => {
@@ -48,7 +52,6 @@ const Home = () => {
     const end = index * pageSize + pageSize
     const newPhotos = fullPhotosList.slice(0, end)
     if(end > fullPhotosList.length) return 
-    console.log(fullPhotosList)
     setList(newPhotos)
   }
   const handleLoadMore = () => {

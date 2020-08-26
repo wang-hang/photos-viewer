@@ -17,16 +17,20 @@ interface Props {
 
 const ImgContainer = (props: Props) => {
   const localLikeList: string[] = LS.get('likeList') || []
-  const { data: {url, id, likeCount}, onLike } = props
+  let { data: {url, id, likeCount}, onLike } = props
   /** State */
   const [loading, setLoading] = useState(true)
   const [isLike, setIsLike] = useState(localLikeList.includes(id))
+  const [selfLikeCount, setSelfLikeCount] = useState(likeCount)
 
   /** handler */
   const handleLoaded = () => { setLoading(false) }
   const toggleLike = () => {
     const preLike = isLike
     onLike(id, !preLike)
+    let newLikeCount = !preLike ? selfLikeCount + 1 : selfLikeCount - 1
+    if(newLikeCount < 0) newLikeCount = 0
+    setSelfLikeCount(newLikeCount)
     setIsLike(!preLike)
   }
 
@@ -55,7 +59,7 @@ const ImgContainer = (props: Props) => {
       }
       <div className='options-bar' onClick={toggleLike}>
         <LikeIcon like={isLike} ></LikeIcon>
-        <div className={countCls}>{likeCount}</div>
+        <div className={countCls}>{selfLikeCount}</div>
       </div>
     </div>
   )
